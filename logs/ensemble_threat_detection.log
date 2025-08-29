@@ -1,0 +1,17 @@
+2025-08-29 18:31:33,940 - INFO - Ensemble Threat Detector initialized with 4 models
+2025-08-29 18:31:33,941 - INFO - Models: ['XGBoost', 'Random Forest', 'Decision Tree', 'Neural Network']
+2025-08-29 18:31:33,941 - INFO - Starting ensemble network monitoring...
+2025-08-29 18:35:51,456 - INFO - Ensemble Threat Detector initialized with 4 models
+2025-08-29 18:35:51,457 - INFO - Models: ['XGBoost', 'Random Forest', 'Decision Tree', 'Neural Network']
+2025-08-29 18:35:51,457 - INFO - Starting ensemble network monitoring...
+2025-08-29 18:38:12,430 - INFO - Ensemble Threat Detector initialized with 4 models
+2025-08-29 18:38:12,430 - INFO - Models: ['XGBoost', 'Random Forest', 'Decision Tree', 'Neural Network']
+2025-08-29 18:38:12,470 - INFO - Starting ensemble network monitoring...
+2025-08-29 18:39:12,427 - INFO - SUMMARY: 21 packets captured | 0 benign flows | 9 active flows
+2025-08-29 18:56:16,794 - INFO - Ensemble Threat Detector initialized with 4 models
+2025-08-29 18:56:16,795 - INFO - Models: ['XGBoost', 'Random Forest', 'Decision Tree', 'Neural Network']
+2025-08-29 18:56:16,795 - INFO - Starting ensemble network monitoring...
+2025-08-29 18:57:16,793 - INFO - SUMMARY: 9 packets captured | 0 benign flows | 5 active flows
+2025-08-29 18:59:16,791 - INFO - SUMMARY: 12 packets captured | 0 benign flows | 8 active flows
+2025-08-29 19:00:16,790 - INFO - SUMMARY: 53 packets captured | 2 benign flows | 17 active flows
+2025-08-29 19:01:16,795 - INFO - SUMMARY: 468 packets captured | 1 benign flows | 171 active flows
