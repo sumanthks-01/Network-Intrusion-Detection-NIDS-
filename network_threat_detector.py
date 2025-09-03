@@ -194,7 +194,7 @@ class NetworkThreatDetector:
 
     def _periodic_summary(self):
         while True:
-            time.sleep(60)  # Summary every 60 seconds
+            time.sleep(30)  # Summary every 30 seconds
             active_flows = len(self.flows)
             if self.benign_counter > 0 or self.packet_counter > 0:
                 self.logger.info(f"SUMMARY: {self.packet_counter} packets captured | {self.benign_counter} benign flows | {active_flows} active flows")
