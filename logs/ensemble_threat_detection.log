@@ -26,3 +26,23 @@
 2025-09-03 19:39:53,585 - INFO - SUMMARY: 265 packets captured | 5 benign flows | 40 active flows
 2025-09-03 19:40:53,587 - INFO - SUMMARY: 115 packets captured | 0 benign flows | 62 active flows
 2025-09-03 19:41:53,588 - INFO - SUMMARY: 184 packets captured | 0 benign flows | 96 active flows
+2025-09-04 10:59:16,497 - INFO - Ensemble Threat Detector initialized with 4 models
+2025-09-04 10:59:16,498 - INFO - Models: ['XGBoost', 'Random Forest', 'Decision Tree', 'Neural Network']
+2025-09-04 10:59:16,498 - INFO - Starting ensemble network monitoring...
+2025-09-04 11:01:15,499 - INFO - SUMMARY: 19 packets captured | 0 benign flows | 8 active flows
+2025-09-04 11:02:53,700 - INFO - SUMMARY: 716 packets captured | 5 benign flows | 107 active flows
+2025-09-04 11:07:42,966 - INFO - SUMMARY: 356 packets captured | 18 benign flows | 163 active flows
+2025-09-04 11:08:43,057 - INFO - SUMMARY: 343 packets captured | 3 benign flows | 256 active flows
+2025-09-04 11:10:11,576 - INFO - SUMMARY: 53 packets captured | 0 benign flows | 271 active flows
+2025-09-04 11:10:43,882 - INFO - Ensemble Threat Detector initialized with 4 models
+2025-09-04 11:10:43,883 - INFO - Models: ['XGBoost', 'Random Forest', 'Decision Tree', 'Neural Network']
+2025-09-04 11:10:43,883 - INFO - Starting ensemble network monitoring...
+2025-09-04 11:11:43,883 - INFO - SUMMARY: 94 packets captured | 0 benign flows | 32 active flows
+2025-09-09 13:37:34,241 - INFO - Ensemble Threat Detector initialized with 4 models
+2025-09-09 13:37:34,242 - INFO - Models: ['XGBoost', 'Random Forest', 'Decision Tree', 'Neural Network']
+2025-09-09 13:37:34,242 - INFO - Starting ensemble network monitoring...
+2025-09-09 13:38:34,242 - INFO - SUMMARY: 110 packets captured | 4 benign flows | 27 active flows
+2025-09-09 13:39:34,243 - INFO - SUMMARY: 61 packets captured | 0 benign flows | 55 active flows
+2025-09-09 13:40:34,245 - INFO - SUMMARY: 115 packets captured | 0 benign flows | 97 active flows
+2025-09-09 13:41:34,248 - INFO - SUMMARY: 25 packets captured | 0 benign flows | 102 active flows
+2025-09-09 13:42:34,253 - INFO - SUMMARY: 52 packets captured | 0 benign flows | 121 active flows
