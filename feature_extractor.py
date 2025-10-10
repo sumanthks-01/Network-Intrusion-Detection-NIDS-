@@ -74,7 +74,7 @@ class NetworkFeatureExtractor:
         
         # Calculate timing features
         timestamps = [p['timestamp'] for p in packets]
-        durations = np.diff(timestamps) if len(timestamps) > 1 else [0]
+        durations = np.diff(timestamps) if len(timestamps) > 1 else np.array([0])
         
         # Extract features (simplified version of CIC-IDS2017 features)
         features = {
@@ -87,10 +87,10 @@ class NetworkFeatureExtractor:
             'bwd_packet_length_mean': bwd_bytes / bwd_packets if bwd_packets > 0 else 0,
             'flow_bytes_s': (fwd_bytes + bwd_bytes) / (timestamps[-1] - timestamps[0]) if len(timestamps) > 1 and timestamps[-1] != timestamps[0] else 0,
             'flow_packets_s': total_packets / (timestamps[-1] - timestamps[0]) if len(timestamps) > 1 and timestamps[-1] != timestamps[0] else 0,
-            'flow_iat_mean': np.mean(durations) if durations else 0,
-            'flow_iat_std': np.std(durations) if durations else 0,
-            'flow_iat_max': np.max(durations) if durations else 0,
-            'flow_iat_min': np.min(durations) if durations else 0,
+            'flow_iat_mean': np.mean(durations) if len(durations) > 0 else 0,
+            'flow_iat_std': np.std(durations) if len(durations) > 0 else 0,
+            'flow_iat_max': np.max(durations) if len(durations) > 0 else 0,
+            'flow_iat_min': np.min(durations) if len(durations) > 0 else 0,
         }
         
         # TCP flags
