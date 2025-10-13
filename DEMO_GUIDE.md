@@ -2,27 +2,39 @@
 
 ## Quick Start for Demonstration
 
-### Option 1: Automated Presentation Demo (Recommended)
+### Option 1: Simple Demo (RECOMMENDED FOR PANELS)
+```bash
+python simple_demo.py
+```
+- Choose **option 2** for structured presentation (5 attack types sequentially)
+- Choose **option 1** for continuous random detections
+- **No dependencies** - works without packet capture or model files
+- **Professional output** with timestamps and confidence scores
+
+### Option 2: Enhanced Live Detector (Demo Mode)
+```bash
+python live_detector.py --demo
+```
+- Simulates attacks without requiring packet capture
+- Shows live statistics every 30 seconds
+- More realistic but requires model files
+
+### Option 3: Original Automated Demo
 ```bash
 python demo_presentation.py
 ```
-Choose option 1 for a structured 5-step demo that automatically shows different attack types.
+- Choose option 1 for structured demo
+- Choose option 2 for interactive mode
 
-### Option 2: Interactive Demo
-```bash
-python demo_presentation.py
-```
-Choose option 2 to manually trigger specific attacks during your presentation.
-
-### Option 3: Separate Components
+### Option 4: Separate Components (Advanced)
 Run these in separate terminals:
 
-**Terminal 1 - Start IDS:**
+**Terminal 1:**
 ```bash
 python live_detector.py
 ```
 
-**Terminal 2 - Generate Attacks:**
+**Terminal 2:**
 ```bash
 python mock_attack_generator.py
 ```
@@ -73,8 +85,25 @@ python mock_attack_generator.py
 
 ## Troubleshooting
 
-If no detections appear:
+### For simple_demo.py (Recommended):
+- **No issues expected** - works without any dependencies
+- If script doesn't run, check Python installation
+
+### For live_detector.py --demo:
+- Ensure model file `ids_model.pkl` exists
+- No administrator privileges required in demo mode
+
+### For real packet capture:
 1. Ensure model file `ids_model.pkl` exists
 2. Run as administrator (Windows) or root (Linux)
 3. Check if firewall is blocking packet capture
 4. Try specifying network interface: `LiveIntrusionDetector(interface='eth0')`
+
+## Best Choice
+
+**Use `python simple_demo.py` with option 2** because:
+- ✅ Works immediately without setup
+- ✅ Professional detection alerts
+- ✅ Structured 5-step demonstration
+- ✅ No technical dependencies
+- ✅ Reliable for live presentations
