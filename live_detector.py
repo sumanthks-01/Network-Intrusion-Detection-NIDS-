@@ -4,6 +4,7 @@ from scapy.all import *
 from feature_extractor import NetworkFeatureExtractor
 from model_trainer import IDSModelTrainer
 import pandas as pd
+from collections import defaultdict
 
 class LiveIntrusionDetector:
     def __init__(self, model_path='ids_model.pkl', interface=None):
@@ -13,9 +14,19 @@ class LiveIntrusionDetector:
         self.interface = interface
         self.detection_log = []
         self.running = False
+        self.packet_count = 0
+        self.attack_counts = defaultdict(int)
+        self.start_time = time.time()
+        self.stats_timer = None
         
     def packet_handler(self, packet):
         try:
+            self.packet_count += 1
+            
+            # Show packet count every 100 packets
+            if self.packet_count % 100 == 0:
+                print(f"Packets captured: {self.packet_count}")
+            
             # Extract features from packet
             features = self.feature_extractor.extract_features(packet)
             
@@ -26,6 +37,9 @@ class LiveIntrusionDetector:
             predicted_labels, probabilities = self.model_trainer.predict(features)
             predicted_label = predicted_labels[0]
             confidence = max(probabilities[0])
+            
+            # Count all predictions
+            self.attack_counts[predicted_label] += 1
             
             # Log detection only if not benign
             if predicted_label != 'BENIGN':
@@ -43,10 +57,10 @@ class LiveIntrusionDetector:
                 self.print_detection(detection_info)
                 
         except Exception as e:
-            print(f"Error processing packet: {e}")
+            pass  # Silently ignore errors to reduce noise
     
     def print_detection(self, detection_info):
-        print(f"\\n{'='*60}")
+        print(f"\n{'='*60}")
         print(f"DETECTION ALERT - {detection_info['timestamp']}")
         print(f"{'='*60}")
         print(f"Source IP: {detection_info['src_ip']}")
@@ -57,13 +71,45 @@ class LiveIntrusionDetector:
         print(f"Packet Size: {detection_info['packet_size']} bytes")
         print(f"{'='*60}")
     
+    def print_live_stats(self):
+        runtime = time.time() - self.start_time
+        benign_count = self.attack_counts.get('BENIGN', 0)
+        intrusion_count = sum(count for attack, count in self.attack_counts.items() if attack != 'BENIGN')
+        
+        print(f"\n{'='*50}")
+        print(f"LIVE STATISTICS - Runtime: {runtime:.0f}s")
+        print(f"{'='*50}")
+        print(f"Total Packets Captured: {self.packet_count}")
+        print(f"Benign Traffic: {benign_count}")
+        print(f"Intrusions Detected: {intrusion_count}")
+        
+        if intrusion_count > 0:
+            print("\nIntrusion Types:")
+            for attack, count in self.attack_counts.items():
+                if attack != 'BENIGN' and count > 0:
+                    print(f"  {attack}: {count}")
+        
+        print(f"{'='*50}")
+    
+    def stats_updater(self):
+        while self.running:
+            time.sleep(30)
+            if self.running:
+                self.print_live_stats()
+    
     def start_detection(self):
         print(f"Starting live intrusion detection...")
         print(f"Interface: {self.interface if self.interface else 'Default'}")
         print(f"Model loaded with {len(self.model_trainer.label_encoder.classes_)} attack types")
-        print("Press Ctrl+C to stop\\n")
+        print("Live statistics will update every 30 seconds")
+        print("Press Ctrl+C to stop\n")
         
         self.running = True
+        self.start_time = time.time()
+        
+        # Start statistics updater thread
+        self.stats_timer = threading.Thread(target=self.stats_updater, daemon=True)
+        self.stats_timer.start()
         
         try:
             if self.interface:
@@ -71,8 +117,9 @@ class LiveIntrusionDetector:
             else:
                 sniff(prn=self.packet_handler, store=0)
         except KeyboardInterrupt:
-            print("\\nStopping detection...")
+            print("\nStopping detection...")
             self.running = False
+            self.print_live_stats()  # Final stats
     
     def save_log(self, filename='detection_log.csv'):
         if self.detection_log:
