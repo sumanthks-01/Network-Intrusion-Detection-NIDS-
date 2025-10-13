@@ -7,10 +7,12 @@ import pandas as pd
 from collections import defaultdict
 
 class LiveIntrusionDetector:
-    def __init__(self, model_path='ids_model.pkl', interface=None):
-        self.feature_extractor = NetworkFeatureExtractor()
-        self.model_trainer = IDSModelTrainer()
-        self.model_trainer.load_model(model_path)
+    def __init__(self, model_path='ids_model.pkl', interface=None, demo_mode=False):
+        self.demo_mode = demo_mode
+        if not demo_mode:
+            self.feature_extractor = NetworkFeatureExtractor()
+            self.model_trainer = IDSModelTrainer()
+            self.model_trainer.load_model(model_path)
         self.interface = interface
         self.detection_log = []
         self.running = False
@@ -18,6 +20,13 @@ class LiveIntrusionDetector:
         self.attack_counts = defaultdict(int)
         self.start_time = time.time()
         self.stats_timer = None
+        
+        # Demo attack types for simulation
+        self.demo_attacks = [
+            'DoS Hulk', 'DoS GoldenEye', 'PortScan', 'FTP-Patator',
+            'SSH-Patator', 'Web Attack XSS', 'DDoS', 'Bot'
+        ]
+        self.demo_ips = ['192.168.1.100', '10.0.0.50', '172.16.0.25']
         
     def packet_handler(self, packet):
         try:
@@ -97,10 +106,47 @@ class LiveIntrusionDetector:
             if self.running:
                 self.print_live_stats()
     
+    def simulate_detection(self):
+        """Simulate intrusion detection for demo purposes"""
+        import random
+        
+        while self.running:
+            # Simulate normal traffic
+            for _ in range(random.randint(5, 15)):
+                if not self.running:
+                    break
+                self.packet_count += 1
+                self.attack_counts['BENIGN'] += 1
+                time.sleep(0.2)
+            
+            # Generate random intrusion
+            if random.random() < 0.6:  # 60% chance
+                attack_type = random.choice(self.demo_attacks)
+                detection_info = {
+                    'timestamp': time.strftime('%Y-%m-%d %H:%M:%S'),
+                    'src_ip': random.choice(self.demo_ips),
+                    'dst_ip': '192.168.1.1',
+                    'protocol': random.choice([6, 17, 1]),
+                    'predicted_attack': attack_type,
+                    'confidence': random.uniform(0.75, 0.98),
+                    'packet_size': random.randint(64, 1500)
+                }
+                
+                self.detection_log.append(detection_info)
+                self.attack_counts[attack_type] += 1
+                self.print_detection(detection_info)
+            
+            time.sleep(random.uniform(3, 10))
+    
     def start_detection(self):
-        print(f"Starting live intrusion detection...")
-        print(f"Interface: {self.interface if self.interface else 'Default'}")
-        print(f"Model loaded with {len(self.model_trainer.label_encoder.classes_)} attack types")
+        if self.demo_mode:
+            print(f"Starting DEMO intrusion detection...")
+            print("Simulating network traffic and attacks for demonstration")
+        else:
+            print(f"Starting live intrusion detection...")
+            print(f"Interface: {self.interface if self.interface else 'Default'}")
+            print(f"Model loaded with {len(self.model_trainer.label_encoder.classes_)} attack types")
+        
         print("Live statistics will update every 30 seconds")
         print("Press Ctrl+C to stop\n")
         
@@ -112,10 +158,13 @@ class LiveIntrusionDetector:
         self.stats_timer.start()
         
         try:
-            if self.interface:
-                sniff(iface=self.interface, prn=self.packet_handler, store=0)
+            if self.demo_mode:
+                self.simulate_detection()
             else:
-                sniff(prn=self.packet_handler, store=0)
+                if self.interface:
+                    sniff(iface=self.interface, prn=self.packet_handler, store=0)
+                else:
+                    sniff(prn=self.packet_handler, store=0)
         except KeyboardInterrupt:
             print("\nStopping detection...")
             self.running = False
@@ -143,15 +192,22 @@ class LiveIntrusionDetector:
         print(df['src_ip'].value_counts().head())
 
 if __name__ == "__main__":
-    # Initialize detector
-    detector = LiveIntrusionDetector()
+    import sys
+    
+    # Check for demo mode
+    demo_mode = '--demo' in sys.argv or '-d' in sys.argv
+    
+    if demo_mode:
+        print("Running in DEMO mode (simulated attacks)")
+        detector = LiveIntrusionDetector(demo_mode=True)
+    else:
+        print("Running in LIVE mode (real packet capture)")
+        detector = LiveIntrusionDetector()
     
     try:
-        # Start live detection
         detector.start_detection()
     except KeyboardInterrupt:
-        print("\\nDetection stopped by user")
+        print("\nDetection stopped by user")
     finally:
-        # Show statistics and save log
         detector.get_statistics()
         detector.save_log()
