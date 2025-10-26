@@ -188,9 +188,7 @@ Class-wise Performance (F1-Scores):
 ├── SSH-Patator: 0.99
 ├── DoS slowloris: 1.00
 ├── Bot: 0.92
-├── Web Attack – Brute Force: 0.82
-├── Web Attack – XSS: 0.57
-└── Infiltration: 0.37
+└── Web Attack – Brute Force: 0.82
 ```
 
 ---
