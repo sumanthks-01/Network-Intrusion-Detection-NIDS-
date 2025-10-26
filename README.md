@@ -1,166 +1,44 @@
-# 🛡️ Advanced Network Threat Detection System
+# Network Intrusion Detection System
 
-> **A comprehensive machine learning-powered cybersecurity solution for real-time network threat identification and intelligent logging**
+A machine learning-based network intrusion detection system using XGBoost for multi-label classification and Scapy for live packet analysis.
 
-[![Python](https://img.shields.io/badge/Python-3.7+-blue.svg)](https://python.org)
-[![ML Models](https://img.shields.io/badge/ML-6%20Models-green.svg)](#models)
-[![Dataset](https://img.shields.io/badge/Dataset-CIC--IDS2017-orange.svg)](#dataset)
-[![Accuracy](https://img.shields.io/badge/Best%20Accuracy-99.90%25-brightgreen.svg)](#performance)
+## Features
 
-## 🎯 Project Overview
+- **Multi-label Classification**: Detects 15 different attack types including:
+  - BENIGN (Normal traffic)
+  - DoS attacks (Hulk, GoldenEye, slowloris, Slowhttptest)
+  - DDoS attacks
+  - Port Scan
+  - Brute Force attacks (FTP-Patator, SSH-Patator)
+  - Web attacks (XSS, SQL Injection, Brute Force)
+  - Bot traffic
+  - Infiltration
+  - Heartbleed
 
-This project implements a sophisticated **Network Intrusion Detection System (NIDS)** that combines real-time packet analysis with state-of-the-art machine learning to identify and classify cyber threats. The system processes live network traffic, extracts meaningful features, and uses pre-trained models to detect various attack types including DoS, Port Scanning, Botnet activity, and Web attacks.
-
-### 🔥 Key Highlights
 - **Real-time Detection**: Live packet capture and analysis using Scapy
-- **Multi-class Classification**: Identifies 15 different threat categories
-- **99.90% Accuracy**: Achieved with optimized XGBoost model
-- **Intelligent Logging**: Detailed threat alerts + periodic benign summaries
-- **Production Ready**: Configurable, scalable, and enterprise-grade
+- **Feature Extraction**: Automated network flow feature extraction
+- **High Accuracy**: XGBoost classifier trained on CIC-IDS2017 dataset
 
----
+## Installation
 
-## 📊 Dataset & Performance
-
-### Dataset Information
-- **Source**: CIC-IDS2017 Dataset
-- **Size**: 2.8M+ network flows
-- **Features**: 78 network flow characteristics
-- **Classes**: 15 attack types + benign traffic
-- **Coverage**: 5 days of network activity (Monday-Friday)
-
-### Attack Types Detected
-| Category | Examples | Samples |
-|----------|----------|----------|
-| **Benign** | Normal traffic | 2.27M |
-| **DoS Attacks** | Hulk, GoldenEye, Slowloris | 252K |
-| **Port Scan** | Network reconnaissance | 158K |
-| **Botnet** | ARES botnet activity | 1.9K |
-| **Web Attacks** | Brute Force, XSS, SQL Injection | 2.1K |
-| **Infiltration** | Droppers, backdoors | 36 flows |
-
----
-
-## 🤖 Machine Learning Pipeline
-
-### Model Comparison Results
-
-| Model | Accuracy | Precision | Recall | F1-Score | ROC AUC |
-|-------|----------|-----------|--------|----------|---------|
-| **XGBoost** 🏆 | **99.90%** | **99.90%** | **99.90%** | **99.90%** | **100.00%** |
-| Random Forest | 99.87% | 99.86% | 99.87% | 99.86% | 97.80% |
-| Decision Tree | 99.84% | 99.84% | 99.84% | 99.84% | 93.66% |
-| Neural Network | 99.53% | 99.54% | 99.53% | 99.49% | 98.59% |
-| Logistic Regression | 97.64% | 97.74% | 97.64% | 97.59% | 99.06% |
-| LightGBM | 96.68% | 97.18% | 96.68% | 96.83% | 66.46% |
-
-### Feature Engineering
-- **Flow-based Analysis**: Bidirectional network flow statistics
-- **Temporal Features**: Inter-arrival times, flow duration
-- **Statistical Metrics**: Mean, std, min, max of packet sizes
-- **Protocol Analysis**: TCP/UDP specific characteristics
-- **Behavioral Patterns**: Packet count ratios, byte distributions
-
----
-
-## 🏗️ System Architecture
-
-```
-┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
-│   Live Network  │───▶│  Packet Capture  │───▶│ Flow Aggregation│
-│     Traffic     │    │    (Scapy)       │    │   & Features    │
-└─────────────────┘    └──────────────────┘    └─────────────────┘
-                                                          │
-┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
-│ Threat Logging  │◀───│ Ensemble Voting  │◀───│ Feature Scaling │
-│   & Alerting    │    │  (4 ML Models)   │    │  (StandardScaler)│
-└─────────────────┘    └──────────────────┘    └─────────────────┘
-                                │
-        ┌───────────────────────┼───────────────────────┐
-        │                       │                       │
-┌──────────────┐    ┌──────────────┐    ┌──────────────┐    ┌──────────────┐
-│   XGBoost    │    │Random Forest │    │Decision Tree │    │Neural Network│
-│   (35%)      │    │    (30%)     │    │    (20%)     │    │    (15%)     │
-└──────────────┘    └──────────────┘    └──────────────┘    └──────────────┘
-```
-
-### Core Components
-
-1. **Data Pipeline** (`load_and_clean_data.py`)
-   - Combines multiple CSV files from CIC-IDS2017
-   - Handles missing values and infinite values
-   - Performs initial data cleaning and validation
-
-2. **ML Analysis Engine** (`ml_models_analysis.py`)
-   - Trains and evaluates 6 different ML models
-   - Performs hyperparameter optimization
-   - Generates comprehensive performance reports
-   - Saves trained models with timestamps
-
-3. **Real-time Detectors**
-   - `network_threat_detector.py`: Single XGBoost model detector
-   - `ensemble_threat_detector.py`: Multi-model ensemble detector
-   - Live packet capture and flow tracking
-   - Real-time feature extraction
-   - Weighted ensemble voting for improved accuracy
-
-4. **Deployment Tools**
-   - `run_detector.py`: Production deployment script
-   - `test_system.py`: System validation and testing
-   - Configuration management and monitoring
-
----
-
-## 🚀 Quick Start Guide
-
-### Prerequisites
+1. Install required packages:
 ```bash
-# System Requirements
-- Python 3.7+
-- Administrator/Root privileges (for packet capture)
-- 4GB+ RAM (for model loading)
-- Network interface access
-```
-
-### Installation
-```bash
-# Clone and setup
-git clone <repository>
-cd "Major project"
-
-# Install dependencies
 pip install -r requirements.txt
-
-# Verify system
-python test_system.py
 ```
 
-### Usage Examples
-
-#### 1. Train Models (One-time Setup)
+2. Train the model:
 ```bash
-# Process dataset and train all models
-python load_and_clean_data.py
-python ml_models_analysis.py
+python train_model.py
 ```
 
-#### 2. Real-time Threat Detection
+3. Start live detection:
 ```bash
-# Start ensemble monitoring (recommended)
-python run_detector.py --mode ensemble
-
-# Start single model monitoring
-python run_detector.py --mode single
-
-# Custom interface and logging
-python run_detector.py --mode ensemble --interface "Wi-Fi" --log "custom.log"
+python live_detector.py
 ```
 
-#### 3. View Results
-```bash
-# Check model performance
-cat results/model_comparison.csv
+## Usage
 
+<<<<<<< HEAD
 # Monitor threat logs
 tail -f logs/threat_detection.log
 ```
@@ -276,73 +154,43 @@ Ensemble Configuration:
 ## 🛠️ Advanced Configuration
 
 ### Custom Ensemble Configuration
+=======
+### Training the Model
+>>>>>>> cad283e698c734d465827cfe9f100c1eec0fb717
 ```python
-# Modify ensemble_threat_detector.py for custom weights
-models_config = {
-    'XGBoost': {'path': 'models/xgboost_model_*.pkl', 'weight': 0.40},
-    'Random Forest': {'path': 'models/random_forest_model_*.pkl', 'weight': 0.35},
-    'Decision Tree': {'path': 'models/decision_tree_model_*.pkl', 'weight': 0.15},
-    'Neural Network': {'path': 'models/neural_network_model_*.pkl', 'weight': 0.10}
-}
+from model_trainer import IDSModelTrainer
+
+trainer = IDSModelTrainer()
+trainer.train_model('data/combined_cleaned_dataset.csv')
+trainer.save_model('ids_model.pkl')
 ```
 
-### Detection Mode Selection
-```bash
-# Run ensemble detector (recommended)
-python run_detector.py --mode ensemble --interface "Ethernet"
-
-# Run single model detector
-python run_detector.py --mode single --interface "Ethernet"
-
-# List available interfaces
-python -c "from scapy.all import get_if_list; print(get_if_list())"
-```
-
-### Custom Logging Configuration
+### Live Detection
 ```python
-# Modify logging levels in network_threat_detector.py
-logging.basicConfig(
-    level=logging.DEBUG,  # More verbose output
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-)
+from live_detector import LiveIntrusionDetector
+
+detector = LiveIntrusionDetector('ids_model.pkl')
+detector.start_detection()
 ```
 
----
+### Custom Interface
+```python
+detector = LiveIntrusionDetector('ids_model.pkl', interface='eth0')
+detector.start_detection()
+```
 
-## 🔒 Security Considerations
+## Model Performance
 
-- **Passive Monitoring**: No packet modification or injection
-- **Privilege Requirements**: Raw socket access needs admin rights
-- **Data Privacy**: Logs may contain sensitive network information
-- **Performance Impact**: Minimal CPU/memory overhead
-- **False Positives**: <0.1% false positive rate in testing
+The XGBoost model is trained on the CIC-IDS2017 dataset with over 2.8M samples and achieves high accuracy in detecting various network attacks.
 
----
+## Files
 
-## 🤝 Contributing
+- `model_trainer.py`: XGBoost model training and evaluation
+- `feature_extractor.py`: Network flow feature extraction from packets
+- `live_detector.py`: Real-time intrusion detection system
+- `train_model.py`: Script to train the model
+- `requirements.txt`: Required Python packages
 
-1. **Fork** the repository
-2. **Create** feature branch (`git checkout -b feature/enhancement`)
-3. **Commit** changes (`git commit -am 'Add new feature'`)
-4. **Push** to branch (`git push origin feature/enhancement`)
-5. **Create** Pull Request
+## Note
 
----
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-## 🙏 Acknowledgments
-
-- **CIC-IDS2017 Dataset**: Canadian Institute for Cybersecurity
-- **Scapy Library**: Packet manipulation and capture
-- **XGBoost Team**: High-performance gradient boosting
-- **Scikit-learn**: Machine learning framework
-
----
-
-- 📖 **Documentation**: [Technical Docs](THREAT_DETECTOR_README.md)
-
+Run as administrator/root for packet capture capabilities.
