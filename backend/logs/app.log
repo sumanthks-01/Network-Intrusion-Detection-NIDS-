@@ -1,0 +1,6 @@
+2025-11-09 10:52:18.711 | DEBUG    | app.services.ml_model:load_model:16 - Loading model from: ./data/ids_model.pkl
+2025-11-09 10:52:28.342 | INFO     | app.services.ml_model:load_model:30 - ✅ ML model loaded successfully.
+2025-11-09 10:52:28.975 | INFO     | app.core.db:get_supabase:27 - Supabase client initialized
+2025-11-09 10:55:12.220 | DEBUG    | app.services.ml_model:load_model:16 - Loading model from: ./data/ids_model.pkl
+2025-11-09 10:55:14.743 | INFO     | app.services.ml_model:load_model:30 - ✅ ML model loaded successfully.
+2025-11-09 10:55:15.225 | INFO     | app.core.db:get_supabase:27 - Supabase client initialized

@@ -6,3 +6,4 @@ scapy
 joblib
 matplotlib
 seaborn
+requests

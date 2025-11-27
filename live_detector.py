@@ -5,14 +5,26 @@ from feature_extractor import NetworkFeatureExtractor
 from model_trainer import IDSModelTrainer
 import pandas as pd
 from collections import defaultdict
+import requests
+import json
+
+
 
 class LiveIntrusionDetector:
-    def __init__(self, model_path='ids_model.pkl', interface=None, demo_mode=False):
+    def __init__(self, model_path='ids_model.pkl', interface=None, demo_mode=False, use_backend=True):
         self.demo_mode = demo_mode
+        self.use_backend = use_backend
+        
         if not demo_mode:
             self.feature_extractor = NetworkFeatureExtractor()
             self.model_trainer = IDSModelTrainer()
-            self.model_trainer.load_model(model_path)
+            try:
+                self.model_trainer.load_model(model_path)
+                print(f"Model loaded successfully from {model_path}")
+            except Exception as e:
+                print(f"Error loading model: {e}")
+                raise
+        
         self.interface = interface
         self.detection_log = []
         self.running = False
@@ -21,12 +33,28 @@ class LiveIntrusionDetector:
         self.start_time = time.time()
         self.stats_timer = None
         
+
+        
         # Demo attack types for simulation
         self.demo_attacks = [
             'DoS Hulk', 'DoS GoldenEye', 'PortScan', 'FTP-Patator',
             'SSH-Patator', 'Web Attack XSS', 'DDoS', 'Bot'
         ]
         self.demo_ips = ['192.168.1.100', '10.0.0.50', '172.16.0.25']
+        
+        # Backend API integration
+        self.backend_url = "http://localhost:8000"
+        if self.use_backend:
+            try:
+                response = requests.get(f"{self.backend_url}/api/health", timeout=5)
+                if response.status_code == 200:
+                    print("Backend API connection established")
+                else:
+                    print("Backend API not responding")
+                    self.use_backend = False
+            except Exception as e:
+                print(f"Backend API connection failed: {e}")
+                self.use_backend = False
         
     def packet_handler(self, packet):
         try:
@@ -57,13 +85,28 @@ class LiveIntrusionDetector:
                     'src_ip': packet[IP].src if IP in packet else 'Unknown',
                     'dst_ip': packet[IP].dst if IP in packet else 'Unknown',
                     'protocol': packet[IP].proto if IP in packet else 'Unknown',
-                    'predicted_attack': predicted_label,
+                    'attack_type': predicted_label,
                     'confidence': confidence,
-                    'packet_size': len(packet)
+                    'packet_size': len(packet),
+                    'features': features if isinstance(features, dict) else {}
                 }
                 
                 self.detection_log.append(detection_info)
                 self.print_detection(detection_info)
+                
+                # Log to backend API
+                if self.use_backend:
+                    try:
+                        features_list = list(features.values()) if isinstance(features, dict) else []
+                        requests.post(
+                            f"{self.backend_url}/api/detections/predict",
+                            json={"features": features_list, "meta": detection_info},
+                            timeout=5
+                        )
+                    except Exception as e:
+                        print(f"Failed to log to backend: {e}")
+                
+
                 
         except Exception as e:
             pass  # Silently ignore errors to reduce noise
@@ -75,7 +118,7 @@ class LiveIntrusionDetector:
         print(f"Source IP: {detection_info['src_ip']}")
         print(f"Destination IP: {detection_info['dst_ip']}")
         print(f"Protocol: {detection_info['protocol']}")
-        print(f"Attack Type: {detection_info['predicted_attack']}")
+        print(f"Attack Type: {detection_info['attack_type']}")
         print(f"Confidence: {detection_info['confidence']:.2%}")
         print(f"Packet Size: {detection_info['packet_size']} bytes")
         print(f"{'='*60}")
@@ -127,14 +170,28 @@ class LiveIntrusionDetector:
                     'src_ip': random.choice(self.demo_ips),
                     'dst_ip': '192.168.1.1',
                     'protocol': random.choice([6, 17, 1]),
-                    'predicted_attack': attack_type,
+                    'attack_type': attack_type,
                     'confidence': random.uniform(0.75, 0.98),
-                    'packet_size': random.randint(64, 1500)
+                    'packet_size': random.randint(64, 1500),
+                    'features': {}
                 }
                 
                 self.detection_log.append(detection_info)
                 self.attack_counts[attack_type] += 1
                 self.print_detection(detection_info)
+                
+                # Log to backend API (demo mode)
+                if self.use_backend:
+                    try:
+                        requests.post(
+                            f"{self.backend_url}/api/detections/predict",
+                            json={"features": [0.5, 0.7, 0.3], "meta": detection_info},
+                            timeout=5
+                        )
+                    except Exception as e:
+                        print(f"Failed to log to backend: {e}")
+                
+
             
             time.sleep(random.uniform(3, 10))
     
@@ -187,7 +244,7 @@ class LiveIntrusionDetector:
         print("\\nDetection Statistics:")
         print(f"Total detections: {len(df)}")
         print("\\nAttack types detected:")
-        print(df['predicted_attack'].value_counts())
+        print(df['attack_type'].value_counts())
         print("\\nTop source IPs:")
         print(df['src_ip'].value_counts().head())
 

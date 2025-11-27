@@ -1,0 +1,10 @@
+fastapi==0.115.4
+uvicorn[standard]==0.30.6
+pydantic==2.9.2
+python-dotenv==1.0.1
+loguru==0.7.2
+httpx==0.27.2
+supabase==2.6.0 # supabase-py official client
+pandas==2.2.3 # if you do feature work
+scikit-learn==1.5.2 # if model uses sklearn
+apscheduler==3.10.4 # background jobs (optional)
