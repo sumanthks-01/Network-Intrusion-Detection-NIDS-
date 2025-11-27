@@ -4,3 +4,21 @@
 2025-11-09 10:55:12.220 | DEBUG    | app.services.ml_model:load_model:16 - Loading model from: ./data/ids_model.pkl
 2025-11-09 10:55:14.743 | INFO     | app.services.ml_model:load_model:30 - ✅ ML model loaded successfully.
 2025-11-09 10:55:15.225 | INFO     | app.core.db:get_supabase:27 - Supabase client initialized
+2025-11-27 19:41:37.996 | DEBUG    | app.services.ml_model:load_model:16 - Loading model from: ../ids_model.pkl
+2025-11-27 19:41:39.465 | INFO     | app.services.ml_model:load_model:30 - ✅ ML model loaded successfully.
+2025-11-27 19:41:39.517 | WARNING  | app.core.db:get_supabase:18 - Supabase not configured!
+2025-11-27 19:41:39.517 | INFO     | app.services.supabase_client:save_detection:20 - Using SQLite fallback
+2025-11-27 19:41:39.524 | INFO     | app.services.database:init_database:25 - Database initialized
+2025-11-27 19:41:39.530 | INFO     | app.services.database:save_detection_sqlite:45 - Detection saved to SQLite
+2025-11-27 19:42:14.372 | WARNING  | app.core.db:get_supabase:18 - Supabase not configured!
+2025-11-27 19:42:14.372 | INFO     | app.services.supabase_client:save_detection:20 - Using SQLite fallback
+2025-11-27 19:42:14.377 | INFO     | app.services.database:init_database:25 - Database initialized
+2025-11-27 19:42:14.422 | INFO     | app.services.database:save_detection_sqlite:45 - Detection saved to SQLite
+2025-11-27 19:50:03.757 | WARNING  | app.core.db:get_supabase:18 - Supabase not configured!
+2025-11-27 19:50:03.758 | INFO     | app.services.supabase_client:save_detection:20 - Using SQLite fallback
+2025-11-27 19:50:03.766 | INFO     | app.services.database:init_database:25 - Database initialized
+2025-11-27 19:50:03.809 | INFO     | app.services.database:save_detection_sqlite:45 - Detection saved to SQLite
+2025-11-27 19:50:28.744 | WARNING  | app.core.db:get_supabase:18 - Supabase not configured!
+2025-11-27 19:50:28.745 | INFO     | app.services.supabase_client:save_detection:20 - Using SQLite fallback
+2025-11-27 19:50:28.750 | INFO     | app.services.database:init_database:25 - Database initialized
+2025-11-27 19:50:28.757 | INFO     | app.services.database:save_detection_sqlite:45 - Detection saved to SQLite
