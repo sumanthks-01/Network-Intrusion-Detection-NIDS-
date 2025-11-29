@@ -22,3 +22,71 @@
 2025-11-27 19:50:28.745 | INFO     | app.services.supabase_client:save_detection:20 - Using SQLite fallback
 2025-11-27 19:50:28.750 | INFO     | app.services.database:init_database:25 - Database initialized
 2025-11-27 19:50:28.757 | INFO     | app.services.database:save_detection_sqlite:45 - Detection saved to SQLite
+2025-11-29 08:01:58.597 | DEBUG    | app.services.ml_model:load_model:16 - Loading model from: ../ids_model.pkl
+2025-11-29 08:02:00.201 | INFO     | app.services.ml_model:load_model:30 - ✅ ML model loaded successfully.
+2025-11-29 08:02:00.740 | INFO     | app.core.db:get_supabase:27 - Supabase client initialized
+2025-11-29 08:02:01.236 | ERROR    | app.services.supabase_client:save_detection:17 - Supabase save failed: [Errno 11001] getaddrinfo failed
+2025-11-29 08:02:01.237 | INFO     | app.services.supabase_client:save_detection:20 - Using SQLite fallback
+2025-11-29 08:02:01.253 | INFO     | app.services.database:init_database:25 - Database initialized
+2025-11-29 08:02:01.260 | INFO     | app.services.database:save_detection_sqlite:45 - Detection saved to SQLite
+2025-11-29 08:02:31.880 | ERROR    | app.services.supabase_client:save_detection:17 - Supabase save failed: [Errno 11001] getaddrinfo failed
+2025-11-29 08:02:31.881 | INFO     | app.services.supabase_client:save_detection:20 - Using SQLite fallback
+2025-11-29 08:02:31.886 | INFO     | app.services.database:init_database:25 - Database initialized
+2025-11-29 08:02:31.941 | INFO     | app.services.database:save_detection_sqlite:45 - Detection saved to SQLite
+2025-11-29 08:02:47.119 | ERROR    | app.services.supabase_client:save_detection:17 - Supabase save failed: [Errno 11001] getaddrinfo failed
+2025-11-29 08:02:47.120 | INFO     | app.services.supabase_client:save_detection:20 - Using SQLite fallback
+2025-11-29 08:02:47.123 | INFO     | app.services.database:init_database:25 - Database initialized
+2025-11-29 08:02:47.127 | INFO     | app.services.database:save_detection_sqlite:45 - Detection saved to SQLite
+2025-11-29 08:02:58.172 | ERROR    | app.services.supabase_client:save_detection:17 - Supabase save failed: [Errno 11001] getaddrinfo failed
+2025-11-29 08:02:58.173 | INFO     | app.services.supabase_client:save_detection:20 - Using SQLite fallback
+2025-11-29 08:02:58.176 | INFO     | app.services.database:init_database:25 - Database initialized
+2025-11-29 08:02:58.181 | INFO     | app.services.database:save_detection_sqlite:45 - Detection saved to SQLite
+2025-11-29 08:05:26.682 | DEBUG    | app.services.ml_model:load_model:16 - Loading model from: ../ids_model.pkl
+2025-11-29 08:05:28.532 | INFO     | app.services.ml_model:load_model:30 - ✅ ML model loaded successfully.
+2025-11-29 08:05:29.079 | INFO     | app.core.db:get_supabase:27 - Supabase client initialized
+2025-11-29 08:05:29.568 | ERROR    | app.services.supabase_client:save_detection:17 - Supabase save failed: [Errno 11001] getaddrinfo failed
+2025-11-29 08:05:29.569 | INFO     | app.services.supabase_client:save_detection:20 - Using SQLite fallback
+2025-11-29 08:05:29.573 | INFO     | app.services.database:init_database:25 - Database initialized
+2025-11-29 08:05:29.621 | INFO     | app.services.database:save_detection_sqlite:45 - Detection saved to SQLite
+2025-11-29 08:05:38.169 | ERROR    | app.services.supabase_client:save_detection:17 - Supabase save failed: [Errno 11001] getaddrinfo failed
+2025-11-29 08:05:38.169 | INFO     | app.services.supabase_client:save_detection:20 - Using SQLite fallback
+2025-11-29 08:05:38.185 | INFO     | app.services.database:init_database:25 - Database initialized
+2025-11-29 08:05:38.229 | INFO     | app.services.database:save_detection_sqlite:45 - Detection saved to SQLite
+2025-11-29 08:08:32.108 | DEBUG    | app.services.ml_model:load_model:16 - Loading model from: ../ids_model.pkl
+2025-11-29 08:08:33.473 | INFO     | app.services.ml_model:load_model:30 - ✅ ML model loaded successfully.
+2025-11-29 08:08:33.971 | INFO     | app.core.db:get_supabase:27 - Supabase client initialized
+2025-11-29 08:08:34.709 | ERROR    | app.services.supabase_client:save_detection:17 - Supabase save failed: [Errno 11001] getaddrinfo failed
+2025-11-29 08:08:34.710 | INFO     | app.services.supabase_client:save_detection:20 - Using SQLite fallback
+2025-11-29 08:08:34.716 | INFO     | app.services.database:init_database:25 - Database initialized
+2025-11-29 08:08:34.765 | INFO     | app.services.database:save_detection_sqlite:45 - Detection saved to SQLite
+2025-11-29 08:08:51.343 | ERROR    | app.services.supabase_client:save_detection:17 - Supabase save failed: [Errno 11001] getaddrinfo failed
+2025-11-29 08:08:51.343 | INFO     | app.services.supabase_client:save_detection:20 - Using SQLite fallback
+2025-11-29 08:08:51.346 | INFO     | app.services.database:init_database:25 - Database initialized
+2025-11-29 08:08:51.393 | INFO     | app.services.database:save_detection_sqlite:45 - Detection saved to SQLite
+2025-11-29 08:19:54.406 | DEBUG    | app.services.ml_model:load_model:16 - Loading model from: ../ids_model.pkl
+2025-11-29 08:19:55.829 | INFO     | app.services.ml_model:load_model:30 - ✅ ML model loaded successfully.
+2025-11-29 08:19:56.320 | INFO     | app.core.db:get_supabase:27 - Supabase client initialized
+2025-11-29 08:19:56.892 | ERROR    | app.services.supabase_client:save_detection:20 - Supabase save failed: [Errno 11001] getaddrinfo failed
+2025-11-29 09:52:15.278 | DEBUG    | app.services.ml_model:load_model:16 - Loading model from: ../ids_model.pkl
+2025-11-29 09:52:16.911 | INFO     | app.services.ml_model:load_model:30 - ✅ ML model loaded successfully.
+2025-11-29 09:52:17.460 | INFO     | app.core.db:get_supabase:27 - Supabase client initialized
+2025-11-29 09:52:19.765 | INFO     | app.services.supabase_client:save_detection:17 - Detection saved to Supabase
+2025-11-29 09:57:22.248 | INFO     | app.services.supabase_client:save_detection:17 - Detection saved to Supabase
+2025-11-29 09:57:45.596 | INFO     | app.services.supabase_client:save_detection:17 - Detection saved to Supabase
+2025-11-29 09:58:00.268 | INFO     | app.services.supabase_client:save_detection:17 - Detection saved to Supabase
+2025-11-29 10:01:55.964 | DEBUG    | app.services.ml_model:load_model:16 - Loading model from: ../ids_model.pkl
+2025-11-29 10:01:57.041 | INFO     | app.services.ml_model:load_model:30 - ✅ ML model loaded successfully.
+2025-11-29 10:01:57.432 | INFO     | app.core.db:get_supabase:27 - Supabase client initialized
+2025-11-29 10:01:58.541 | ERROR    | app.services.supabase_client:save_detection:33 - Supabase save failed: {'message': "Could not find the 'dst_ip' column of 'detections' in the schema cache", 'code': 'PGRST204', 'hint': None, 'details': None}
+2025-11-29 10:02:08.009 | ERROR    | app.services.supabase_client:save_detection:33 - Supabase save failed: {'message': "Could not find the 'dst_ip' column of 'detections' in the schema cache", 'code': 'PGRST204', 'hint': None, 'details': None}
+2025-11-29 10:02:18.184 | ERROR    | app.services.supabase_client:save_detection:33 - Supabase save failed: {'message': "Could not find the 'dst_ip' column of 'detections' in the schema cache", 'code': 'PGRST204', 'hint': None, 'details': None}
+2025-11-29 10:05:02.221 | INFO     | app.core.db:get_supabase:27 - Supabase client initialized
+2025-11-29 10:05:04.176 | ERROR    | app.services.supabase_client:save_detection:20 - Supabase save failed: {'message': "Could not find the 'dst_ip' column of 'detections' in the schema cache", 'code': 'PGRST204', 'hint': None, 'details': None}
+2025-11-29 22:03:27.118 | INFO     | app.api.detections:predict:11 - Received prediction request: {'attack_type': 'SSH-Patator', 'confidence': 0.7907336336261828, 'src_ip': '192.168.1.100', 'dst_ip': '192.168.1.1', 'timestamp': '2025-11-29 22:03:25'}
+2025-11-29 22:03:27.119 | INFO     | app.api.detections:predict:26 - Saving detection: {'prediction': 'SSH-Patator', 'score': 0.7907336336261828, 'src_ip': '192.168.1.100', 'dst_ip': '192.168.1.1', 'timestamp': '2025-11-29 22:03:25'}
+2025-11-29 22:03:27.662 | INFO     | app.core.db:get_supabase:27 - Supabase client initialized
+2025-11-29 22:03:31.279 | ERROR    | app.services.supabase_client:save_detection:20 - Supabase save failed: {'message': "Could not find the 'dst_ip' column of 'detections' in the schema cache", 'code': 'PGRST204', 'hint': None, 'details': None}
+2025-11-29 22:06:06.825 | INFO     | app.api.detections:predict:11 - Received prediction request: {'attack_type': 'DoS GoldenEye', 'confidence': 0.8778796026224005, 'src_ip': '192.168.1.100', 'dst_ip': '192.168.1.1', 'timestamp': '2025-11-29 22:06:04'}
+2025-11-29 22:06:06.826 | INFO     | app.api.detections:predict:24 - Saving detection: {'prediction': 'DoS GoldenEye', 'score': 0.8778796026224005, 'meta': {'attack_type': 'DoS GoldenEye', 'confidence': 0.8778796026224005, 'src_ip': '192.168.1.100', 'dst_ip': '192.168.1.1', 'timestamp': '2025-11-29 22:06:04'}}
+2025-11-29 22:06:07.331 | INFO     | app.core.db:get_supabase:27 - Supabase client initialized
+2025-11-29 22:06:09.393 | INFO     | app.services.supabase_client:save_detection:17 - Detection saved to Supabase: DoS GoldenEye

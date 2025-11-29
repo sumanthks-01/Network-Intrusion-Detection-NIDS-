@@ -6,17 +6,16 @@ from loguru import logger
 TABLE = settings.SUPABASE_TABLE_DETECTIONS
 
 def save_detection(data: dict):
-    # Try Supabase first
+    # Try Supabase only
     supa = get_supabase()
-    if supa:
-        try:
-            resp = supa.table(TABLE).insert(data).execute()
-            logger.info("Detection saved to Supabase")
-            return resp.data if hasattr(resp, "data") else None
-        except Exception as e:
-            logger.error(f"Supabase save failed: {e}")
+    if not supa:
+        logger.error("Supabase not configured")
+        return None
     
-    # Fallback to SQLite
-    logger.info("Using SQLite fallback")
-    save_detection_sqlite(data)
-    return data
+    try:
+        resp = supa.table(TABLE).insert(data).execute()
+        logger.info(f"Detection saved to Supabase: {data.get('prediction', 'Unknown')}")
+        return resp.data if hasattr(resp, "data") else None
+    except Exception as e:
+        logger.error(f"Supabase save failed: {e}")
+        return None

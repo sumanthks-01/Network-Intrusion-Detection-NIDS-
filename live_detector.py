@@ -81,7 +81,7 @@ class LiveIntrusionDetector:
             # Log detection only if not benign
             if predicted_label != 'BENIGN':
                 detection_info = {
-                    'timestamp': time.strftime('%Y-%m-%d %H:%M:%S'),
+                    'timestamp': time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()),
                     'src_ip': packet[IP].src if IP in packet else 'Unknown',
                     'dst_ip': packet[IP].dst if IP in packet else 'Unknown',
                     'protocol': packet[IP].proto if IP in packet else 'Unknown',
@@ -98,9 +98,20 @@ class LiveIntrusionDetector:
                 if self.use_backend:
                     try:
                         features_list = list(features.values()) if isinstance(features, dict) else []
+                        # Send attack data to backend
+                        backend_data = {
+                            "features": features_list,
+                            "meta": {
+                                "attack_type": predicted_label,
+                                "confidence": float(confidence),
+                                "src_ip": detection_info['src_ip'],
+                                "dst_ip": detection_info['dst_ip'],
+                                "timestamp": detection_info['timestamp']
+                            }
+                        }
                         requests.post(
                             f"{self.backend_url}/api/detections/predict",
-                            json={"features": features_list, "meta": detection_info},
+                            json=backend_data,
                             timeout=5
                         )
                     except Exception as e:
@@ -166,7 +177,7 @@ class LiveIntrusionDetector:
             if random.random() < 0.6:  # 60% chance
                 attack_type = random.choice(self.demo_attacks)
                 detection_info = {
-                    'timestamp': time.strftime('%Y-%m-%d %H:%M:%S'),
+                    'timestamp': time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()),
                     'src_ip': random.choice(self.demo_ips),
                     'dst_ip': '192.168.1.1',
                     'protocol': random.choice([6, 17, 1]),
@@ -183,9 +194,19 @@ class LiveIntrusionDetector:
                 # Log to backend API (demo mode)
                 if self.use_backend:
                     try:
+                        backend_data = {
+                            "features": [0.5, 0.7, 0.3],
+                            "meta": {
+                                "attack_type": attack_type,
+                                "confidence": detection_info['confidence'],
+                                "src_ip": detection_info['src_ip'],
+                                "dst_ip": detection_info['dst_ip'],
+                                "timestamp": detection_info['timestamp']
+                            }
+                        }
                         requests.post(
                             f"{self.backend_url}/api/detections/predict",
-                            json={"features": [0.5, 0.7, 0.3], "meta": detection_info},
+                            json=backend_data,
                             timeout=5
                         )
                     except Exception as e:
