@@ -90,3 +90,7 @@
 2025-11-29 22:06:06.826 | INFO     | app.api.detections:predict:24 - Saving detection: {'prediction': 'DoS GoldenEye', 'score': 0.8778796026224005, 'meta': {'attack_type': 'DoS GoldenEye', 'confidence': 0.8778796026224005, 'src_ip': '192.168.1.100', 'dst_ip': '192.168.1.1', 'timestamp': '2025-11-29 22:06:04'}}
 2025-11-29 22:06:07.331 | INFO     | app.core.db:get_supabase:27 - Supabase client initialized
 2025-11-29 22:06:09.393 | INFO     | app.services.supabase_client:save_detection:17 - Detection saved to Supabase: DoS GoldenEye
+2025-11-30 17:37:36.502 | INFO     | app.api.detections:predict:11 - Received prediction request: {'attack_type': 'Bot', 'confidence': 0.8282352302447841, 'src_ip': '10.0.0.50', 'dst_ip': '192.168.1.1', 'timestamp': '2025-11-30 17:37:34'}
+2025-11-30 17:37:36.503 | INFO     | app.api.detections:predict:24 - Saving detection: {'prediction': 'Bot', 'score': 0.8282352302447841, 'meta': {'attack_type': 'Bot', 'confidence': 0.8282352302447841, 'src_ip': '10.0.0.50', 'dst_ip': '192.168.1.1', 'timestamp': '2025-11-30 17:37:34'}}
+2025-11-30 17:37:37.082 | INFO     | app.core.db:get_supabase:27 - Supabase client initialized
+2025-11-30 17:37:39.218 | INFO     | app.services.supabase_client:save_detection:17 - Detection saved to Supabase: Bot
