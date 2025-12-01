@@ -12,6 +12,9 @@ if (localStorage.getItem('isLoggedIn') !== 'true') {
     window.location.href = '/';
 }
 
+// Initialize notification permission status
+let notificationPermissionRequested = false;
+
 // Initialize dashboard
 document.addEventListener('DOMContentLoaded', function() {
     // Set user email
@@ -91,6 +94,9 @@ function getNetworkInfo() {
 }
 
 async function startDetection() {
+    // Request notification permission on user interaction
+    requestNotificationPermission();
+    
     try {
         // Check backend connection
         const response = await fetch(`${API_BASE_URL}/api/health/`);
@@ -172,6 +178,8 @@ function startSimulation() {
         }
     }
     
+    // Remove benign notifications - only show attacks
+    
     // Continue simulation
     setTimeout(startSimulation, 2000);
 }
@@ -239,6 +247,93 @@ function addRecentDetection(type, category) {
     while (detectionList.children.length > 10) {
         detectionList.removeChild(detectionList.lastChild);
     }
+    
+    // Show notification for attacks only
+    if (category === 'attack') {
+        showNotification(type, 'attack');
+    }
+}
+
+function showNotification(attackType, category) {
+    // Only show notifications for attacks
+    if (category !== 'attack') return;
+    
+    // Show browser notification if permission granted
+    if ('Notification' in window && Notification.permission === 'granted') {
+        createNotification(attackType);
+    }
+    
+    // Always show in-page notification
+    showInPageNotification(attackType);
+}
+
+function createNotification(attackType) {
+    try {
+        console.log('Creating notification for:', attackType);
+        const notification = new Notification('🚨 INTRUSION DETECTED', {
+            body: `Attack: ${attackType}\nTime: ${new Date().toLocaleTimeString()}\nStatus: BLOCKED`,
+            requireInteraction: false,
+            silent: false
+        });
+        
+        console.log('Browser notification created successfully');
+        
+        // Auto-close after 8 seconds
+        setTimeout(() => {
+            notification.close();
+        }, 8000);
+        
+        // Focus window when clicked
+        notification.onclick = function() {
+            window.focus();
+            notification.close();
+        };
+    } catch (error) {
+        console.error('Failed to create notification:', error);
+        // Fallback to alert if notification fails
+        alert(`🚨 INTRUSION DETECTED\nAttack: ${attackType}\nTime: ${new Date().toLocaleTimeString()}`);
+    }
+}
+
+function showInPageNotification(attackType) {
+    // Create in-page notification element
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    
+    notification.innerHTML = `
+        <div class="notification-header">
+            <span>🚨 INTRUSION DETECTED</span>
+            <button class="notification-close" onclick="closeNotification(this)">&times;</button>
+        </div>
+        <div class="notification-body">
+            <strong>Attack Type:</strong> ${attackType}<br>
+            <strong>Time:</strong> ${new Date().toLocaleTimeString()}<br>
+            <strong>Status:</strong> BLOCKED
+        </div>
+    `;
+    
+    // Add to page
+    document.body.appendChild(notification);
+    
+    // Show with animation
+    setTimeout(() => {
+        notification.classList.add('show');
+    }, 100);
+    
+    // Auto-remove after 5 seconds
+    setTimeout(() => {
+        closeNotification(notification.querySelector('.notification-close'));
+    }, 5000);
+}
+
+function closeNotification(closeBtn) {
+    const notification = closeBtn.closest('.notification');
+    notification.classList.remove('show');
+    setTimeout(() => {
+        if (notification.parentNode) {
+            notification.parentNode.removeChild(notification);
+        }
+    }, 300);
 }
 
 async function saveMockDetection(attackType) {
@@ -269,6 +364,9 @@ async function saveMockDetection(attackType) {
 function startMockDetection() {
     if (isMockRunning) return;
     
+    // Request notification permission on first user interaction
+    requestNotificationPermission();
+    
     isMockRunning = true;
     document.querySelector('.demo-btn').textContent = '🔄 Mock Detection Running...';
     document.querySelector('.demo-btn').disabled = true;
@@ -281,6 +379,36 @@ function startMockDetection() {
         document.querySelector('.demo-btn').textContent = '🔍 Wanna know how our system works?';
         document.querySelector('.demo-btn').disabled = false;
     }, 30000);
+}
+
+function requestNotificationPermission() {
+    if (!notificationPermissionRequested) {
+        if ('Notification' in window) {
+            console.log('Current permission:', Notification.permission);
+            if (Notification.permission === 'default') {
+                console.log('Requesting notification permission...');
+                Notification.requestPermission().then(function(permission) {
+                    console.log('Permission result:', permission);
+                    if (permission === 'granted') {
+                        alert('Notifications enabled! You will be alerted of intrusions.');
+                    } else {
+                        alert('Notifications blocked. You will only see in-page alerts.');
+                    }
+                }).catch(function(error) {
+                    console.error('Permission request failed:', error);
+                });
+            } else if (Notification.permission === 'granted') {
+                console.log('Notifications already granted');
+            } else {
+                console.log('Notifications denied');
+                alert('Notifications are blocked. Enable them in browser settings for background alerts.');
+            }
+        } else {
+            console.log('Browser does not support notifications');
+            alert('Your browser does not support notifications.');
+        }
+        notificationPermissionRequested = true;
+    }
 }
 
 // Add some animation to stat cards
