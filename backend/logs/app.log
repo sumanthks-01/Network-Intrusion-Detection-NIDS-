@@ -94,3 +94,11 @@
 2025-11-30 17:37:36.503 | INFO     | app.api.detections:predict:24 - Saving detection: {'prediction': 'Bot', 'score': 0.8282352302447841, 'meta': {'attack_type': 'Bot', 'confidence': 0.8282352302447841, 'src_ip': '10.0.0.50', 'dst_ip': '192.168.1.1', 'timestamp': '2025-11-30 17:37:34'}}
 2025-11-30 17:37:37.082 | INFO     | app.core.db:get_supabase:27 - Supabase client initialized
 2025-11-30 17:37:39.218 | INFO     | app.services.supabase_client:save_detection:17 - Detection saved to Supabase: Bot
+2025-11-30 19:23:46.945 | INFO     | app.core.db:get_supabase:27 - Supabase client initialized
+2025-11-30 19:23:49.853 | ERROR    | app.api.auth:login:65 - Login error: {'message': "Could not find the table 'public.users' in the schema cache", 'code': 'PGRST205', 'hint': None, 'details': None}
+2025-11-30 19:23:50.158 | ERROR    | app.api.auth:login:65 - Login error: {'message': "Could not find the table 'public.users' in the schema cache", 'code': 'PGRST205', 'hint': None, 'details': None}
+2025-11-30 19:23:50.466 | ERROR    | app.api.auth:login:65 - Login error: {'message': "Could not find the table 'public.users' in the schema cache", 'code': 'PGRST205', 'hint': None, 'details': None}
+2025-11-30 19:23:50.772 | ERROR    | app.api.auth:login:65 - Login error: {'message': "Could not find the table 'public.users' in the schema cache", 'code': 'PGRST205', 'hint': None, 'details': None}
+2025-11-30 19:23:51.079 | ERROR    | app.api.auth:login:65 - Login error: {'message': "Could not find the table 'public.users' in the schema cache", 'code': 'PGRST205', 'hint': None, 'details': None}
+2025-11-30 19:23:51.386 | ERROR    | app.api.auth:login:65 - Login error: {'message': "Could not find the table 'public.users' in the schema cache", 'code': 'PGRST205', 'hint': None, 'details': None}
+2025-11-30 19:23:51.693 | ERROR    | app.api.auth:login:65 - Login error: {'message': "Could not find the table 'public.users' in the schema cache", 'code': 'PGRST205', 'hint': None, 'details': None}

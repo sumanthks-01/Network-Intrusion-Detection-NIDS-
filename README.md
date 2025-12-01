@@ -1,6 +1,16 @@
 # Network Intrusion Detection System (NIDS)
 
-A comprehensive machine learning-based network intrusion detection system featuring XGBoost classification, real-time packet analysis, FastAPI backend, and multiple demonstration modes.
+A comprehensive machine learning-based network intrusion detection system featuring XGBoost classification, real-time packet analysis, FastAPI backend, web frontend, and multiple demonstration modes.
+
+## 🌐 Complete Web Application
+
+### Frontend Features
+- **User Authentication**: Login/Signup system
+- **Real-time Dashboard**: Live detection monitoring
+- **Network Status**: Connected interface display
+- **Interactive Charts**: Binary classification visualization
+- **Mock Detection**: "Wanna know how our system works?" demo
+- **Responsive Design**: Clean, simple interface with animations
 
 ## 🚀 Features
 
@@ -35,17 +45,26 @@ Major project/
 ├── backend/                    # FastAPI backend application
 │   ├── app/
 │   │   ├── api/               # API endpoints
+│   │   │   ├── detections.py  # Detection API
+│   │   │   ├── stats.py       # Statistics API
+│   │   │   ├── auth.py        # Authentication
+│   │   │   └── frontend.py    # Frontend serving
 │   │   ├── core/              # Configuration and logging
 │   │   ├── models/            # Data models
 │   │   └── services/          # Business logic
 │   └── requirements.txt       # Backend dependencies
+├── frontend/                   # Web frontend
+│   ├── index.html             # Login page
+│   ├── dashboard.html         # Main dashboard
+│   ├── style.css              # Styling
+│   ├── auth.js                # Authentication logic
+│   └── dashboard.js           # Dashboard functionality
 ├── data/                      # CIC-IDS2017 dataset files
 ├── model_trainer.py           # XGBoost model training
 ├── feature_extractor.py       # Network flow feature extraction
 ├── live_detector.py           # Real-time detection system
-├── simple_demo.py             # Lightweight demo (recommended)
-├── demo_presentation.py       # Full presentation demo
-├── mock_attack_generator.py   # Attack simulation
+├── start_complete_system.py   # Complete system launcher
+├── simple_demo.py             # Lightweight demo
 └── train_model.py            # Model training script
 ```
 
@@ -70,32 +89,36 @@ python run.py
 
 ## 🎯 Quick Start
 
-### 1. Simple Demo (Recommended for Presentations)
+### 1. Complete Web Application (Recommended)
 ```bash
-python simple_demo.py
+python start_complete_system.py
 ```
-- **Option 1**: Continuous random detections
-- **Option 2**: Structured 5-step presentation
-- **No dependencies**: Works without model files or admin privileges
+- **Full System**: Backend + Frontend + Database
+- **Web Interface**: http://localhost:8000
+- **User Authentication**: Login/Signup
+- **Real-time Dashboard**: Live monitoring
+- **Mock Detection**: Built-in demo mode
 
-### 2. Live Detection (Real Packets)
+### 2. Backend Only
 ```bash
-# Run as administrator/root
+cd backend
+python run.py
+```
+- **API Server**: http://localhost:8000
+- **API Documentation**: http://localhost:8000/docs
+
+### 3. Live Detection (Command Line)
+```bash
+# Real packets (requires admin)
 python live_detector.py
-```
 
-### 3. Demo Mode (Simulated)
-```bash
+# Demo mode
 python live_detector.py --demo
 ```
 
-### 4. Attack Simulation
+### 4. Simple Demo (Presentations)
 ```bash
-# Terminal 1: Start detector
-python live_detector.py
-
-# Terminal 2: Generate attacks
-python mock_attack_generator.py
+python simple_demo.py
 ```
 
 ## 💻 Usage Examples

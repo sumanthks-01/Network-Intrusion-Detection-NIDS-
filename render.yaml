@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: nids-backend
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "cd backend && python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: SUPABASE_URL
+        value: https://boyywwgvkwweupojpfwo.supabase.co
+      - key: SUPABASE_ANON_KEY
+        value: sb_publishable_tTdmAKj540LoWuRj2KSrsA_dSlg9Usz
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        value: sb_secret_5N_WEzl8k33PxnyZ8RCSEg_QXekKjPs
+      - key: MODEL_PATH
+        value: ids_model.pkl

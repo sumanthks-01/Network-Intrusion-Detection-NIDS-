@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIDS - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="dashboard">
+        <header>
+            <h1>Network Intrusion Detection System</h1>
+            <div class="user-info">
+                <span id="userEmail"></span>
+                <button onclick="logout()" class="logout-btn">Logout</button>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <div class="control-panel">
+                <div class="network-info">
+                    <h3>Network Status</h3>
+                    <p>Connected: <span id="networkType">WiFi</span></p>
+                    <p>Interface: <span id="networkInterface">wlan0</span></p>
+                </div>
+
+                <div class="detection-controls">
+                    <button id="startBtn" onclick="startDetection()" class="start-btn">Start Detection</button>
+                    <button id="stopBtn" onclick="stopDetection()" class="stop-btn" disabled>Stop Detection</button>
+                    <div class="status">
+                        <span id="detectionStatus">Stopped</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <h3>Real-time Detection Results</h3>
+                <canvas id="detectionChart"></canvas>
+                <div class="recent-detections">
+                    <h4>Recent Detections</h4>
+                    <div id="detectionList"></div>
+                </div>
+            </div>
+
+            <div class="stats">
+                <div class="stat-card">
+                    <h4>Benign Traffic</h4>
+                    <span id="benignCount">0</span>
+                </div>
+                <div class="stat-card attack">
+                    <h4>Attacks Detected</h4>
+                    <span id="attackCount">0</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <button onclick="startMockDetection()" class="demo-btn">
+                🔍 Wanna know how our system works?
+            </button>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
