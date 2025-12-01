@@ -1,0 +1,107 @@
+NETWORK INTRUSION DETECTION SYSTEM - EVALUATION REPORT
+============================================================
+
+Evaluation Date: 2025-12-01T15:29:22.119174
+
+OVERALL PERFORMANCE METRICS:
+------------------------------
+Accuracy:           0.9990
+Precision (Macro):  0.9493
+Recall (Macro):     0.8555
+F1-Score (Macro):   0.8773
+Precision (Weighted): 0.9989
+Recall (Weighted):    0.9990
+F1-Score (Weighted):  0.9989
+
+PER-CLASS PERFORMANCE:
+------------------------------
+
+BENIGN:
+  Precision: 0.9997
+  Recall:    0.9994
+  F1-Score:  0.9995
+  Support:   454265.0
+
+Bot:
+  Precision: 0.9437
+  Recall:    0.7289
+  F1-Score:  0.8225
+  Support:   391.0
+
+DDoS:
+  Precision: 0.9998
+  Recall:    0.9996
+  F1-Score:  0.9997
+  Support:   25605.0
+
+DoS GoldenEye:
+  Precision: 0.9981
+  Recall:    0.9947
+  F1-Score:  0.9964
+  Support:   2059.0
+
+DoS Hulk:
+  Precision: 0.9984
+  Recall:    0.9998
+  F1-Score:  0.9991
+  Support:   46025.0
+
+DoS Slowhttptest:
+  Precision: 0.9909
+  Recall:    0.9882
+  F1-Score:  0.9895
+  Support:   1100.0
+
+DoS slowloris:
+  Precision: 0.9974
+  Recall:    0.9957
+  F1-Score:  0.9965
+  Support:   1159.0
+
+FTP-Patator:
+  Precision: 1.0000
+  Recall:    0.9987
+  F1-Score:  0.9994
+  Support:   1587.0
+
+Heartbleed:
+  Precision: 1.0000
+  Recall:    1.0000
+  F1-Score:  1.0000
+  Support:   2.0
+
+Infiltration:
+  Precision: 1.0000
+  Recall:    0.5714
+  F1-Score:  0.7273
+  Support:   7.0
+
+PortScan:
+  Precision: 0.9939
+  Recall:    0.9996
+  F1-Score:  0.9967
+  Support:   31761.0
+
+SSH-Patator:
+  Precision: 1.0000
+  Recall:    0.9992
+  F1-Score:  0.9996
+  Support:   1180.0
+
+Web Attack  Brute Force:
+  Precision: 0.7060
+  Recall:    0.9734
+  F1-Score:  0.8184
+  Support:   301.0
+
+Web Attack  Sql Injection:
+  Precision: 1.0000
+  Recall:    0.5000
+  F1-Score:  0.6667
+  Support:   4.0
+
+Web Attack  XSS:
+  Precision: 0.6111
+  Recall:    0.0846
+  F1-Score:  0.1486
+  Support:   130.0
