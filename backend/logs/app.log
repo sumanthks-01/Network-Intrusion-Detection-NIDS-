@@ -280,3 +280,15 @@
 2025-12-01 14:07:56.627 | INFO     | app.api.detections:predict:11 - Received prediction request: {'attack_type': 'Web Attack XSS', 'confidence': 0.8467745228119643, 'src_ip': '192.168.1.100', 'dst_ip': '192.168.1.1', 'timestamp': '2025-12-01T08:37:56.623Z'}
 2025-12-01 14:07:56.628 | INFO     | app.api.detections:predict:24 - Saving detection: {'prediction': 'Web Attack XSS', 'score': 0.8467745228119643, 'meta': {'attack_type': 'Web Attack XSS', 'confidence': 0.8467745228119643, 'src_ip': '192.168.1.100', 'dst_ip': '192.168.1.1', 'timestamp': '2025-12-01T08:37:56.623Z'}}
 2025-12-01 14:07:57.162 | INFO     | app.services.supabase_client:save_detection:17 - Detection saved to Supabase: Web Attack XSS
+2025-12-02 14:52:04.015 | INFO     | app.core.db:get_supabase:27 - Supabase client initialized
+2025-12-02 14:52:07.057 | INFO     | app.api.auth:login:59 - User logged in: roksdgold@gmail.com
+2025-12-02 14:52:07.228 | INFO     | app.api.auth:login:59 - User logged in: roksdgold@gmail.com
+2025-12-02 14:53:34.946 | INFO     | app.api.detections:predict:11 - Received prediction request: {'attack_type': 'Web Attack XSS', 'confidence': 0.9733747807875528, 'src_ip': '192.168.1.100', 'dst_ip': '192.168.1.1', 'timestamp': '2025-12-02T09:23:34.635Z'}
+2025-12-02 14:53:34.949 | INFO     | app.api.detections:predict:24 - Saving detection: {'prediction': 'Web Attack XSS', 'score': 0.9733747807875528, 'meta': {'attack_type': 'Web Attack XSS', 'confidence': 0.9733747807875528, 'src_ip': '192.168.1.100', 'dst_ip': '192.168.1.1', 'timestamp': '2025-12-02T09:23:34.635Z'}}
+2025-12-02 14:53:36.436 | INFO     | app.services.supabase_client:save_detection:17 - Detection saved to Supabase: Web Attack XSS
+2025-12-02 14:53:36.644 | INFO     | app.api.detections:predict:11 - Received prediction request: {'attack_type': 'PortScan', 'confidence': 0.8540501206390023, 'src_ip': '192.168.1.100', 'dst_ip': '192.168.1.1', 'timestamp': '2025-12-02T09:23:36.643Z'}
+2025-12-02 14:53:36.645 | INFO     | app.api.detections:predict:24 - Saving detection: {'prediction': 'PortScan', 'score': 0.8540501206390023, 'meta': {'attack_type': 'PortScan', 'confidence': 0.8540501206390023, 'src_ip': '192.168.1.100', 'dst_ip': '192.168.1.1', 'timestamp': '2025-12-02T09:23:36.643Z'}}
+2025-12-02 14:53:36.948 | INFO     | app.services.supabase_client:save_detection:17 - Detection saved to Supabase: PortScan
+2025-12-02 14:53:50.323 | INFO     | app.api.detections:predict:11 - Received prediction request: {'attack_type': 'FTP-Patator', 'confidence': 0.8132428269093566, 'src_ip': '192.168.1.100', 'dst_ip': '192.168.1.1', 'timestamp': '2025-12-02T09:23:50.316Z'}
+2025-12-02 14:53:50.324 | INFO     | app.api.detections:predict:24 - Saving detection: {'prediction': 'FTP-Patator', 'score': 0.8132428269093566, 'meta': {'attack_type': 'FTP-Patator', 'confidence': 0.8132428269093566, 'src_ip': '192.168.1.100', 'dst_ip': '192.168.1.1', 'timestamp': '2025-12-02T09:23:50.316Z'}}
+2025-12-02 14:53:51.738 | INFO     | app.services.supabase_client:save_detection:17 - Detection saved to Supabase: FTP-Patator
